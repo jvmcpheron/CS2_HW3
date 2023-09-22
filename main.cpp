@@ -19,14 +19,15 @@ public:
 
 class LinkedList {
 private:
-    LLData* head; // Renamed from dummyFront to head
-    LLData* tail; // Renamed from dummyTail to tail
+
+    LLData* head; 
+    LLData* tail; 
 
 public:
     LinkedList() {
-        head = new LLData(0, nullptr); // Initialize head with 0
-        tail = new LLData(0, nullptr); // Initialize tail with 0
-        head->setNext(tail); // Connect head to tail
+        head = new LLData(0, nullptr); 
+        tail = new LLData(0, nullptr);
+        head->setNext(tail); 
     }
 
     LLData* getFirst() { return head->getNext(); }
