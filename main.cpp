@@ -4,10 +4,10 @@ using namespace std;
 class LLData {
 private:
     int data;
-    LLData *next;
+    LLData* next;
     LLData() {}
 public:
-    LLData(int d, LLData *nxt) {
+    LLData(int d, LLData* nxt) {
         data = d;
         next = nxt;
     }
@@ -16,34 +16,40 @@ public:
     void setData(int d) { data = d; }
     void setNext(LLData* nxt) { next = nxt; }
 };
+
 class LinkedList {
 private:
-    LLData* first;
+    LLData* head; // Renamed from dummyFront to head
+    LLData* tail; // Renamed from dummyTail to tail
+
 public:
-    LinkedList() { first = NULL; }
-    LLData *getFirst() { return first; }
-    void addItem(int d) {
-        first = new LLData(d,first);
+    LinkedList() {
+        head = new LLData(0, nullptr); // Initialize head with 0
+        tail = new LLData(0, nullptr); // Initialize tail with 0
+        head->setNext(tail); // Connect head to tail
     }
+
+    LLData* getFirst() { return head->getNext(); }
+
+    void addItem(int d) {
+        head->setNext(new LLData(d, head->getNext()));
+    }
+
     void showList() {
-        LLData *curr = getFirst();
-        while (curr != NULL) {
+        LLData* curr = getFirst();
+        while (curr != tail) {
             cout << curr->getData() << " -> ";
             curr = curr->getNext();
         }
         cout << endl;
     }
+
     void addItemAtEnd(int d) {
-        if (first == NULL) {
-            first = new LLData(d,first);
+        LLData* curr = head;
+        while (curr->getNext() != tail) {
+            curr = curr->getNext();
         }
-        else {
-            LLData* curr = first;
-            while (curr->getNext() != NULL) {
-                curr = curr->getNext();
-            }
-            curr->setNext(new LLData(d,curr->getNext()));
-        }
+        curr->setNext(new LLData(d, curr->getNext()));
     }
 };
 
