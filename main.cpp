@@ -1,58 +1,66 @@
 #include <iostream>
 using namespace std;
 
+
 class LLData {
-private:
-    int data;
-    LLData* next;
-    LLData() {}
-public:
-    LLData(int d, LLData* nxt) {
-        data = d;
-        next = nxt;
-    }
-    int getData() { return data; }
-    LLData* getNext() { return next; }
-    void setData(int d) { data = d; }
-    void setNext(LLData* nxt) { next = nxt; }
+    private:
+        int data;
+        LLData* next;
+        LLData() {}
+    public:
+        LLData(int d, LLData* nxt) {
+            data = d;
+            next = nxt;
+        }
+        int getData() { return data; }
+        LLData* getNext() { return next; }
+        void setData(int d) { data = d; }
+        void setNext(LLData* nxt) { next = nxt; }
 };
+
 
 class LinkedList {
-private:
+    private:
 
-    LLData* head; 
-    LLData* tail; 
+        LLData* head;
+        LLData* tail;
 
-public:
-    LinkedList() {
-        head = new LLData(0, nullptr); 
-        tail = new LLData(0, nullptr);
-        head->setNext(tail); 
-    }
 
-    LLData* getFirst() { return head->getNext(); }
+    public:
+        LinkedList() {
+            head = new LLData(0, nullptr);
+            tail = new LLData(0, nullptr);
+            head->setNext(tail);
+        }
 
-    void addItem(int d) {
-        head->setNext(new LLData(d, head->getNext()));
-    }
 
-    void showList() {
-        LLData* curr = getFirst();
-        while (curr != tail) {
+        LLData* getFirst() { return head->getNext(); }
+
+
+        void addItem(int d) {
+            head->setNext(new LLData(d, head->getNext()));
+        }
+
+
+        void showList() {
+            LLData* curr = getFirst();
+            while (curr != tail) {
             cout << curr->getData() << " -> ";
             curr = curr->getNext();
+            }
+            cout << endl;
         }
-        cout << endl;
-    }
 
-    void addItemAtEnd(int d) {
-        LLData* curr = head;
-        while (curr->getNext() != tail) {
-            curr = curr->getNext();
+
+        void addItemAtEnd(int d) {
+            LLData* curr = head;
+            while (curr->getNext() != tail) {
+                curr = curr->getNext();
+            }
+            curr->setNext(new LLData(d, curr->getNext()));
         }
-        curr->setNext(new LLData(d, curr->getNext()));
-    }
 };
+
 
 int main() {
     LinkedList myList;
